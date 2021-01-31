@@ -1,11 +1,12 @@
 import './App.styles.css';
-import BookList from '../BookList/BookList.component';
+import BooksList from '../BooksList/BooksList.component';
+import BooksForm from '../BooksForm/BooksForm.component';
 
 function App() {
   return (
     <div className="App">
-      <BookList />
-      {/* <BookForm /> */}
+      <BooksList />
+      <BooksForm />
     </div>
   );
 }
