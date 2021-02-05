@@ -2,16 +2,10 @@ import { CREATE_BOOK, REMOVE_BOOK } from '../actions/index';
 
 const booksReducer = (state = [], action) => {
   switch (action.type) {
-    case CREATE_BOOK:
-      return {
-        ...state,
-        newbook: action.payload,
-      };
-    case REMOVE_BOOK:
-      return {
-        ...state,
-        REMOVE_BOOK: true,
-      };
+    case 'CREATE_BOOK':
+      return CREATE_BOOK(action.book, state);
+    case 'REMOVE_BOOK':
+      return REMOVE_BOOK(action.book, state);
     default:
       return state;
   }
