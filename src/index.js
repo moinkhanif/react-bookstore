@@ -8,8 +8,8 @@ import App from './components/App/App.component';
 import reportWebVitals from './reportWebVitals';
 
 // eslint-disable-next-line no-unused-vars
-const initialState = [
-  {
+const initialStatee = {
+  books: [{
     id: Math.floor(Math.random() * 1000),
     title: 'Eloquent JavaScript, Second Edition',
     category: 'Learning',
@@ -19,9 +19,10 @@ const initialState = [
     title: 'The Great Gatsby',
     category: 'Learning',
   },
-];
+  ],
+};
 
-const store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer, initialStatee);
 
 ReactDOM.render(
   <React.StrictMode>

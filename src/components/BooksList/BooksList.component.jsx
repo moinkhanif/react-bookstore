@@ -4,29 +4,23 @@ import Book from '../Book/Book.component';
 
 const BookList = ({ books }) => (
   <table>
-    <tr>
-      <th>Book Id</th>
-      <th>Title</th>
-      <th>Category</th>
-    </tr>
-    {books.map(book => <Book book={book} key={book.id} />)}
+    <tbody>
+      <tr>
+        <th>Book Id</th>
+        <th>Title</th>
+        <th>Category</th>
+      </tr>
+      {books.map(book => <Book book={book} key={book.id} />)}
+    </tbody>
   </table>
 );
 
 BookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     title: PropTypes.string,
     category: PropTypes.string,
-  })),
-};
-
-BookList.defaultProps = {
-  books: {
-    id: 'Undefined',
-    title: 'Undefined',
-    category: 'Undefined',
-  },
+  })).isRequired,
 };
 
 const mapStateToProps = state => ({
