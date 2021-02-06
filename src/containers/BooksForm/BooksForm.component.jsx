@@ -7,6 +7,7 @@ const BOOK_CATEGORY = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Lear
 const BooksForm = () => {
   const [input, handleChange] = useState({ text: '', category: 'Default', valid: true });
   const dispatch = useDispatch();
+
   const handleSubmit = event => {
     event.preventDefault();
     if (input.text.length < 2) {
