@@ -5,7 +5,8 @@ import { CREATE_BOOK } from '../../actions/index';
 const BOOK_CATEGORY = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
 
 const BooksForm = () => {
-  const [input, handleChange] = useState({ text: '', category: 'Default', valid: true });
+  const initialInput = { text: '', category: 'Default', valid: true };
+  const [input, handleChange] = useState(initialInput);
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
@@ -18,6 +19,7 @@ const BooksForm = () => {
         title: input.text,
         category: input.category,
       }));
+      handleChange(initialInput);
     }
   };
 
