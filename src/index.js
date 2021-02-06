@@ -7,7 +7,6 @@ import rootReducer from './reducers/index';
 import App from './components/App/App.component';
 import reportWebVitals from './reportWebVitals';
 
-// eslint-disable-next-line no-unused-vars
 const initialStatee = {
   books: [{
     id: Math.floor(Math.random() * 1000),
@@ -20,6 +19,7 @@ const initialStatee = {
     category: 'History',
   },
   ],
+  filter: 'All',
 };
 
 const store = createStore(rootReducer, initialStatee);
