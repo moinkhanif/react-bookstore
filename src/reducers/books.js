@@ -1,11 +1,12 @@
-import { CREATE_BOOK, REMOVE_BOOK } from '../actions/index';
-
 const booksReducer = (state = [], action) => {
+  let newState = {};
   switch (action.type) {
     case 'CREATE_BOOK':
-      return CREATE_BOOK(action.book, state);
+      newState = [...state];
+      newState.push(action.newBook);
+      return newState;
     case 'REMOVE_BOOK':
-      return REMOVE_BOOK(action.book, state);
+      return state.filter(sBook => sBook.id !== action.rBook.id);
     default:
       return state;
   }
