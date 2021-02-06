@@ -36,7 +36,7 @@ const BooksForm = () => {
         value={input.text}
         required
       />
-      <select name="category" id="category" onChange={e => handleChange({ ...input, category: e.target.value })}>
+      <select name="category" id="category" onChange={e => handleChange({ ...input, category: e.target.value })} value={input.category}>
         <option value="Default">Default</option>
         {
           BOOK_CATEGORY.map(bookCategory => (
