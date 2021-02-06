@@ -17,7 +17,7 @@ const initialStatee = {
   {
     id: Math.floor(Math.random() * 1000),
     title: 'The Great Gatsby',
-    category: 'Learning',
+    category: 'History',
   },
   ],
 };
