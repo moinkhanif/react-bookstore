@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { BOOK_CATEGORY } from '../../containers/BooksForm/BooksForm.component';
+import './CategoryFilter.styles.css';
 
 const CategoryFilter = ({ handleFilterChange }) => (
   <form>
