@@ -1,5 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;700&display=swap');
+
 .book-container .circle-progress circle {
   transition: stroke-dashoffset 1.5s;
   transform: rotate(270deg);
   transform-origin: center;
+}
+
+.book-container {
+  padding: 50px 25px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 20px auto;
+}
+
+.book-info {
+  text-align: left;
+}
+
+.book-container .book-category {
+  color: #121212;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  opacity: 0.5;
+  margin-bottom: 5px;
+}
+
+.book-info .book-title {
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+}
+
+.book-info .book-author,
+.book-actionable a {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  color: #4386bf;
+}
+
+.book-actionable {
+  padding: 15px 0;
+}
+
+.book-actionable a:first-child {
+  padding: 5px 15px 5px 0;
+}
+
+.book-actionable .actionable-middle {
+  padding: 5px 15px;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+}
+
+.book-actionable a:last-child {
+  padding: 5px 15px 0 15px;
 }

@@ -31,3 +31,11 @@ body {
   max-width: 1400px;
   margin: auto;
 }
+
+.d-flex {
+  display: flex;
+}
+
+.d-jc-center {
+  justify-content: center;
+}

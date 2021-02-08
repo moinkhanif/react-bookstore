@@ -9,11 +9,13 @@ const Book = ({ book }) => {
   const { title, category } = book;
   const dispatch = useDispatch();
 
+  // Progress bar info start
   const DIAMETER = 50;
   const STROKE_WIDTH = 6;
   const RADIUS = DIAMETER / 2 - STROKE_WIDTH / 2;
   const circumference = Math.PI * RADIUS * 2;
   const position = Math.max(1 - progress, 0);
+  // Progress bar info end
 
   useEffect(() => {
     setProgress(64 / 100);
@@ -31,11 +33,11 @@ const Book = ({ book }) => {
         <p className="book-author">Author</p>
         <div className="book-actionable">
           <a href="./#">Comments</a>
-          <a href="./#" onClick={() => handleRemoveBook(book)}>Remove</a>
+          <a href="./#" className="actionable-middle" onClick={() => handleRemoveBook(book)}>Remove</a>
           <a href="./#">Edit</a>
         </div>
       </div>
-      <div className="progress-percent">
+      <div className="progress-percent d-flex d-jc-center">
         <div className="svg-holder">
           <svg
             viewBox="0 0 50 50"
@@ -56,17 +58,16 @@ const Book = ({ book }) => {
               stroke="url(#linear)"
               fill="transparent"
               strokeWidth={STROKE_WIDTH}
-              style={{
-                // stylelint-disable-next-line csstree/validator
-                strokeDasharray: circumference,
-                // stylelint-disable-next-line csstree/validator
-                strokeDashoffset: circumference * position,
-              }}
+              strokeDasharray={circumference}
+              strokeDashoffset={circumference * position}
             />
           </svg>
         </div>
         <div>
-          <p className="progress-value">{progress * 100}</p>
+          <p className="progress-value">
+            {progress * 100}
+            %
+          </p>
           <p className="progress-completed">Completed</p>
         </div>
       </div>
@@ -76,12 +77,6 @@ const Book = ({ book }) => {
         <button type="submit" className="update-progress-button">UPDATE PROGRESS</button>
       </div>
     </div>
-    // <tr>
-    //   <td>{id}</td>
-    //   <td>{title}</td>
-    //   <td>{category}</td>
-    //   <td><button type="submit" onClick={() => handleRemoveBook(book)}>Remove Book</button></td>
-    // </tr>
   );
 };
 
