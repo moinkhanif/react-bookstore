@@ -1,0 +1,5 @@
+.book-container .circle-progress circle {
+  transition: stroke-dashoffset 1.5s;
+  transform: rotate(270deg);
+  transform-origin: center;
+}

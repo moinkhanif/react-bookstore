@@ -13,7 +13,9 @@ The demo can be found at: [https://mk-react-bookstore.herokuapp.com/](https://mk
 
 <!-- ## Credits:
 
-- [codedaily.io](https://codesandbox.io/s/github/codedailyio/ArticleComplete?file=/src/App.js) for their simple progress bar explanation. -->
+- [codedaily.io](https://codesandbox.io/s/github/codedailyio/ArticleComplete?file=/src/App.js) for their simple progress bar explanation.
+- [vanseo design](https://vanseodesign.com/web-design/svg-linear-gradients/) for their informative article on linear gradient for stroke.
+-->
 
 ## Available Scripts
 

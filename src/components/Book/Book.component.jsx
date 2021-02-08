@@ -1,22 +1,87 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { REMOVE_BOOK } from '../../actions';
+import './Book.styles.css';
 
 const Book = ({ book }) => {
-  const { id, title, category } = book;
+  const [progress, setProgress] = useState(0);
+  const { title, category } = book;
   const dispatch = useDispatch();
+
+  const DIAMETER = 50;
+  const STROKE_WIDTH = 6;
+  const RADIUS = DIAMETER / 2 - STROKE_WIDTH / 2;
+  const circumference = Math.PI * RADIUS * 2;
+  const position = Math.max(1 - progress, 0);
+
+  useEffect(() => {
+    setProgress(64 / 100);
+  }, []);
 
   const handleRemoveBook = book => {
     dispatch(REMOVE_BOOK(book));
   };
 
   return (
-    <tr>
-      <td>{id}</td>
-      <td>{title}</td>
-      <td>{category}</td>
-      <td><button type="submit" onClick={() => handleRemoveBook(book)}>Remove Book</button></td>
-    </tr>
+    <div className="book-container">
+      <div className="book-info">
+        <p className="book-category">{category}</p>
+        <h2 className="book-title">{title}</h2>
+        <p className="book-author">Author</p>
+        <div className="book-actionable">
+          <a href="./#">Comments</a>
+          <a href="./#" onClick={() => handleRemoveBook(book)}>Remove</a>
+          <a href="./#">Edit</a>
+        </div>
+      </div>
+      <div className="progress-percent">
+        <div className="svg-holder">
+          <svg
+            viewBox="0 0 50 50"
+            width="100px"
+            height="100px"
+            className="circle-progress"
+          >
+            <defs>
+              <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#379cf6" />
+                <stop offset="100%" stopColor="#307bbe" />
+              </linearGradient>
+            </defs>
+            <circle
+              cx={DIAMETER / 2}
+              cy={DIAMETER / 2}
+              r={RADIUS}
+              stroke="url(#linear)"
+              fill="transparent"
+              strokeWidth={STROKE_WIDTH}
+              style={{
+                // stylelint-disable-next-line csstree/validator
+                strokeDasharray: circumference,
+                // stylelint-disable-next-line csstree/validator
+                strokeDashoffset: circumference * position,
+              }}
+            />
+          </svg>
+        </div>
+        <div>
+          <p className="progress-value">{progress * 100}</p>
+          <p className="progress-completed">Completed</p>
+        </div>
+      </div>
+      <div className="progress-info">
+        <div className="current-chapter-title">CURRENT CHAPTER</div>
+        <div className="current-chapter">Chapter 17</div>
+        <button type="submit" className="update-progress-button">UPDATE PROGRESS</button>
+      </div>
+    </div>
+    // <tr>
+    //   <td>{id}</td>
+    //   <td>{title}</td>
+    //   <td>{category}</td>
+    //   <td><button type="submit" onClick={() => handleRemoveBook(book)}>Remove Book</button></td>
+    // </tr>
   );
 };
 
