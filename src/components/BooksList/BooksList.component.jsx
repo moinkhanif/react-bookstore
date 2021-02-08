@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_FILTER } from '../../actions';
-
 import Book from '../Book/Book.component';
 import CategoryFilter from '../CategoryFilter/CategoryFilter.component';
+import './BookList.styles.css';
 
 const BookList = () => {
   const state = useSelector(state => state);
@@ -22,7 +22,9 @@ const BookList = () => {
 
   return (
     <>
-      <CategoryFilter handleFilterChange={handleFilterChange} />
+      <div className="filter-container max-width-limit">
+        <CategoryFilter handleFilterChange={handleFilterChange} />
+      </div>
       <table>
         <tbody>
           <tr>

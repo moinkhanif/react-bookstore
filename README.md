@@ -11,6 +11,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The demo can be found at: [https://mk-react-bookstore.herokuapp.com/](https://mk-react-bookstore.herokuapp.com/)
 
+<!-- ## Credits:
+
+- [codedaily.io](https://codesandbox.io/s/github/codedailyio/ArticleComplete?file=/src/App.js) for their simple progress bar explanation. -->
+
 ## Available Scripts
 
 In the project directory, you can run:
