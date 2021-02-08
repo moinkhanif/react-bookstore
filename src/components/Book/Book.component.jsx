@@ -6,8 +6,10 @@ import './Book.styles.css';
 
 const Book = ({ book }) => {
   const [progress, setProgress] = useState(0);
+  const [deleteBook, setDeleteBook] = useState(false);
   const { title, category } = book;
   const dispatch = useDispatch();
+  let delay;
 
   // Progress bar info start
   const DIAMETER = 50;
@@ -19,21 +21,36 @@ const Book = ({ book }) => {
 
   useEffect(() => {
     setProgress(64 / 100);
+    return () => {
+      clearTimeout(delay);
+    };
   }, []);
 
   const handleRemoveBook = book => {
-    dispatch(REMOVE_BOOK(book));
+    delay = setTimeout(() => {
+      dispatch(REMOVE_BOOK(book));
+    }, 500);
+    setDeleteBook(true);
   };
 
   return (
-    <div className="book-container">
+    <div className={`book-container${deleteBook ? ' deleted' : ''}`}>
       <div className="book-info">
         <p className="book-category">{category}</p>
         <h2 className="book-title">{title}</h2>
         <p className="book-author">Author</p>
         <div className="book-actionable">
           <a href="./#">Comments</a>
-          <a href="./#" className="actionable-middle" onClick={() => handleRemoveBook(book)}>Remove</a>
+          <a
+            href="./#"
+            className="actionable-middle"
+            onClick={e => {
+              e.preventDefault();
+              handleRemoveBook(book);
+            }}
+          >
+            Remove
+          </a>
           <a href="./#">Edit</a>
         </div>
       </div>
