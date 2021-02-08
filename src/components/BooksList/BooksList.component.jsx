@@ -21,7 +21,7 @@ const BookList = () => {
   const emptyMessage = 'Sorry no books in the selected category';
 
   return (
-    <>
+    <main className="main-body">
       <div className="filter-container max-width-limit">
         <CategoryFilter handleFilterChange={handleFilterChange} />
       </div>
@@ -30,7 +30,7 @@ const BookList = () => {
           ? <p className="empty-books">{emptyMessage}</p>
           : filteredBooks.map(book => <Book book={book} key={book.id} />) }
       </div>
-    </>
+    </main>
   );
 };
 
