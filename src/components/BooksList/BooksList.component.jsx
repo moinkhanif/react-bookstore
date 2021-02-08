@@ -25,18 +25,11 @@ const BookList = () => {
       <div className="filter-container max-width-limit">
         <CategoryFilter handleFilterChange={handleFilterChange} />
       </div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Book Id</th>
-            <th>Title</th>
-            <th>Category</th>
-          </tr>
-          { filteredBooks.length < 1
-            ? <tr className="empty-books"><td>{emptyMessage}</td></tr>
-            : filteredBooks.map(book => <Book book={book} key={book.id} />) }
-        </tbody>
-      </table>
+      <div className="books-container max-width-limit">
+        { filteredBooks.length < 1
+          ? <p className="empty-books">{emptyMessage}</p>
+          : filteredBooks.map(book => <Book book={book} key={book.id} />) }
+      </div>
     </>
   );
 };

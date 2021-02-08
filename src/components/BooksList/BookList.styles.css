@@ -2,3 +2,9 @@
   text-align: left;
   padding: 30px 5px;
 }
+
+.books-container .empty-books {
+  padding: 50px 0;
+  font-size: 2rem;
+  opacity: 0.5;
+}
