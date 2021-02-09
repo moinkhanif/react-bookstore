@@ -32,6 +32,10 @@ const BooksForm = () => {
     }
   };
 
+  const cancelError = () => {
+    handleChange({ ...input, valid: true });
+  };
+
   return (
     <div className="max-width-limit">
       <h2 className="form-title">Add New Book</h2>
@@ -63,9 +67,12 @@ const BooksForm = () => {
           </select>
           <input type="submit" onClick={handleSubmit} value="ADD BOOK" />
         </div>
-        <div className="error-message">
-          <p>{`Error: ${input.errorMessage}`}</p>
-        </div>
+        {input.valid ? '' : (
+          <div className="error-message">
+            <div tabIndex={0} role="button" className="error-close" onKeyDown={cancelError} onClick={cancelError}>X</div>
+            <p>{`Error: ${input.errorMessage}`}</p>
+          </div>
+        )}
       </form>
     </div>
   );

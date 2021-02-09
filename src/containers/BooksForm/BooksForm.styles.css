@@ -1,3 +1,7 @@
+#book-form {
+  margin-bottom: 50px;
+}
+
 #book-form .form-content {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
@@ -38,4 +42,43 @@
   color: #fff;
   cursor: pointer;
   border-radius: 4px;
+}
+
+#book-form .error-message p {
+  background-color: rgba(163, 3, 3, 0.61);
+  padding: 15px;
+  margin-top: 10px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: error-appear 500ms forwards;
+  transition: opacity 500ms, transform 500ms;
+}
+
+.error-message {
+  position: relative;
+}
+
+.error-message .error-close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  padding: 3px;
+  z-index: 10;
+  color: #fff;
+  cursor: pointer;
+}
+
+@keyframes error-appear {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-disappear {
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
 }
