@@ -80,11 +80,8 @@ const Book = ({ book }) => {
             />
           </svg>
         </div>
-        <div>
-          <p className="progress-value">
-            {progress * 100}
-            %
-          </p>
+        <div className="progress-value-container">
+          <p className="progress-value">{`${progress * 100}%`}</p>
           <p className="progress-completed">Completed</p>
         </div>
       </div>
