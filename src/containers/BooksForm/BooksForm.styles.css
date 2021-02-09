@@ -1,0 +1,41 @@
+#book-form .form-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+
+.form-title {
+  text-align: left;
+  padding: 30px 0;
+  border-top: 1px solid #e8e8e8;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.18px;
+  color: #8888;
+}
+
+#book-form #title {
+  padding: 13px 17px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+#book-form #title::placeholder {
+  color: #c4c4c4;
+}
+
+#book-form #category {
+  border: 1px solid #e8e8e8;
+  padding-left: 17px;
+  margin: 0 15px;
+}
+
+#book-form input[type="submit"] {
+  margin-left: 15px;
+  background-color: #0290ff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
