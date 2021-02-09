@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_FILTER } from '../../actions';
-
 import Book from '../Book/Book.component';
 import CategoryFilter from '../CategoryFilter/CategoryFilter.component';
+import './BookList.styles.css';
 
 const BookList = () => {
   const state = useSelector(state => state);
@@ -21,21 +21,16 @@ const BookList = () => {
   const emptyMessage = 'Sorry no books in the selected category';
 
   return (
-    <>
-      <CategoryFilter handleFilterChange={handleFilterChange} />
-      <table>
-        <tbody>
-          <tr>
-            <th>Book Id</th>
-            <th>Title</th>
-            <th>Category</th>
-          </tr>
-          { filteredBooks.length < 1
-            ? <tr className="empty-books"><td>{emptyMessage}</td></tr>
-            : filteredBooks.map(book => <Book book={book} key={book.id} />) }
-        </tbody>
-      </table>
-    </>
+    <main className="main-body">
+      <div className="filter-container max-width-limit">
+        <CategoryFilter handleFilterChange={handleFilterChange} />
+      </div>
+      <div className="books-container max-width-limit">
+        { filteredBooks.length < 1
+          ? <p className="empty-books">{emptyMessage}</p>
+          : filteredBooks.map(book => <Book book={book} key={book.id} />) }
+      </div>
+    </main>
   );
 };
 

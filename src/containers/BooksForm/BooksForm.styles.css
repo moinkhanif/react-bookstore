@@ -1,0 +1,84 @@
+#book-form {
+  margin-bottom: 50px;
+}
+
+#book-form .form-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+}
+
+.form-title {
+  text-align: left;
+  padding: 30px 0;
+  border-top: 1px solid #e8e8e8;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.18px;
+  color: #8888;
+}
+
+#book-form #title {
+  padding: 13px 17px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+#book-form #title::placeholder {
+  color: #c4c4c4;
+}
+
+#book-form #category {
+  border: 1px solid #e8e8e8;
+  padding-left: 17px;
+  margin: 0 15px;
+}
+
+#book-form input[type="submit"] {
+  margin-left: 15px;
+  background-color: #0290ff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#book-form .error-message p {
+  background-color: rgba(163, 3, 3, 0.61);
+  padding: 15px;
+  margin-top: 10px;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: error-appear 500ms forwards;
+  transition: opacity 500ms, transform 500ms;
+}
+
+.error-message {
+  position: relative;
+}
+
+.error-message .error-close {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  padding: 3px;
+  z-index: 10;
+  color: #fff;
+  cursor: pointer;
+}
+
+@keyframes error-appear {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-disappear {
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
