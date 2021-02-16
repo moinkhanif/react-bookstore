@@ -22,6 +22,10 @@ const BooksForm = () => {
       handleChange({
         ...input, errorId: 2, valid: false, errorMessage: 'Category cannot be Default value',
       });
+    } else if (!input.category.replace(/\s/g, '').length) {
+      handleChange({
+        ...input, errorId: 2, valid: false, errorMessage: 'Please enter valid value for category',
+      });
     } else {
       dispatch(CREATE_BOOK({
         id: Math.floor(Math.random() * 1000),
@@ -52,8 +56,16 @@ const BooksForm = () => {
             value={input.text}
             required
           />
-          <select name="category" id="category" className={input.errorId === 2 && !input.valid ? 'invalid' : ''} onChange={e => handleChange({ ...input, category: e.target.value })} value={input.category}>
-            <option value="Default">Default</option>
+          <input
+            type="text"
+            name="category"
+            id="category"
+            placeholder="Default"
+            list="categoryName"
+            className={input.errorId === 2 && !input.valid ? 'invalid' : ''}
+            onChange={e => handleChange({ ...input, category: e.target.value })}
+          />
+          <datalist id="categoryName">
             {
               BOOK_CATEGORY.map(bookCategory => (
                 <option
@@ -64,7 +76,7 @@ const BooksForm = () => {
                 </option>
               ))
             }
-          </select>
+          </datalist>
           <input type="submit" onClick={handleSubmit} value="ADD BOOK" />
         </div>
         {input.valid ? '' : (
