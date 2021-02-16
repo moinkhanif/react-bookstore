@@ -1,16 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CREATE_BOOK } from '../../actions/index';
 import './BooksForm.styles.css';
+import loader from '../../images/spinner.svg';
 
 export const BOOK_CATEGORY = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
 
 const BooksForm = () => {
   const initialInput = {
-    text: '', category: 'Default', valid: true, errorId: 0, errorMessage: '',
+    text: '', category: '', valid: true, errorId: 0, errorMessage: '', getDetails: true,
   };
   const [input, handleChange] = useState(initialInput);
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
+  const categoryRef = useRef(null);
+  let searchDelay;
+
+  useEffect(() => () => {
+    clearTimeout(searchDelay);
+  }, []);
+
+  useEffect(() => {
+    if (input.text.length >= 2 && input.getDetails) {
+      fetch('http://127.0.0.1:3001/suggest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: input.text,
+        }),
+      }).then(response => response.json())
+        .then(data => {
+          if (data.books.totalItems > 0) {
+            setSuggestions(data.books.items);
+          }
+          setLoading(false);
+        });
+    }
+  }, [input]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,11 +63,36 @@ const BooksForm = () => {
         category: input.category,
       }));
       handleChange(initialInput);
+      inputRef.current.value = '';
     }
+  };
+
+  const handleSuggestion = (e, book) => {
+    inputRef.current.value = e.target.textContent;
+    const category = book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'Default';
+    handleChange({
+      ...input,
+      text: e.target.textContent,
+      getDetails: false,
+      category,
+    });
+    setSuggestions([]);
   };
 
   const cancelError = () => {
     handleChange({ ...input, valid: true });
+  };
+
+  const handleInput = e => {
+    if (inputRef.current.value.length >= 2) {
+      setLoading(true);
+    }
+    clearTimeout(searchDelay);
+    searchDelay = setTimeout(() => {
+      if (input.text !== e.target.value) {
+        handleChange({ ...input, text: e.target.value, getDetails: true });
+      }
+    }, 5000);
   };
 
   return (
@@ -49,11 +104,13 @@ const BooksForm = () => {
             type="text"
             name="title"
             id="title"
-            onChange={e => handleChange({ ...input, text: e.target.value })}
+            onChange={handleInput}
             minLength="2"
             placeholder={input.valid ? 'Enter Book Name' : 'Enter Valid Book Name'}
             className={input.valid && input.errorId === 1 ? 'valid' : 'invalid'}
-            value={input.text}
+            autoComplete="off"
+            list="bookNames"
+            ref={inputRef}
             required
           />
           <input
@@ -62,8 +119,10 @@ const BooksForm = () => {
             id="category"
             placeholder="Default"
             list="categoryName"
+            ref={categoryRef}
             className={input.errorId === 2 && !input.valid ? 'invalid' : ''}
             onChange={e => handleChange({ ...input, category: e.target.value })}
+            value={input.category}
           />
           <datalist id="categoryName">
             {
@@ -78,6 +137,19 @@ const BooksForm = () => {
             }
           </datalist>
           <input type="submit" onClick={handleSubmit} value="ADD BOOK" />
+        </div>
+        <div className="suggestion-box">
+          <div className="suggestions">
+            { loading
+              ? (
+                <div className="loading-suggestions">
+                  <object type="image/svg+xml" data={loader}>loading</object>
+                </div>
+              )
+              : suggestions.slice(0, 2).map((book, i) => (
+                <div role="menuitem" tabIndex={i} key={book.id} onKeyDown={e => handleSuggestion(e, book)} onClick={e => handleSuggestion(e, book)} className="book">{book.volumeInfo.title}</div>
+              ))}
+          </div>
         </div>
         {input.valid ? '' : (
           <div className="error-message">

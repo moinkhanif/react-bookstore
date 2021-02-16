@@ -2,7 +2,8 @@
   margin-bottom: 50px;
 }
 
-#book-form .form-content {
+#book-form .form-content,
+#book-form .suggestion-box {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
 }
@@ -66,6 +67,25 @@
   padding: 3px;
   z-index: 10;
   color: #fff;
+  cursor: pointer;
+}
+
+.suggestion-box .suggestions {
+  border: 1px solid #e8e8e8;
+  margin-right: 15px;
+  background-color: rgb(241, 242, 243);
+  height: auto;
+  transition: height 1s;
+}
+
+.suggestion-box .loading-suggestions object {
+  height: 70px;
+  width: 70px;
+}
+
+.suggestion-box .book {
+  padding: 20px 10px;
+  border: 1px solid rgba(153, 153, 153, 0.281);
   cursor: pointer;
 }
 
