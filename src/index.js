@@ -12,11 +12,13 @@ const initialStatee = {
     id: Math.floor(Math.random() * 1000),
     title: 'Eloquent JavaScript, Second Edition',
     category: 'Learning',
+    progress: 20,
   },
   {
     id: Math.floor(Math.random() * 1000),
     title: 'The Great Gatsby',
     category: 'History',
+    progress: 64,
   },
   ],
   filter: 'All',

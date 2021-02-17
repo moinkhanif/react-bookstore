@@ -5,9 +5,14 @@ import { REMOVE_BOOK } from '../../actions';
 import './Book.styles.css';
 
 const Book = ({ book }) => {
-  const [progress, setProgress] = useState(0);
+  const [currentProgress, setCurrentProgress] = useState(0);
   const [deleteBook, setDeleteBook] = useState(false);
-  const { title, category, author } = book;
+  const {
+    title,
+    category,
+    author,
+    progress,
+  } = book;
   const dispatch = useDispatch();
   let delay;
 
@@ -16,11 +21,11 @@ const Book = ({ book }) => {
   const STROKE_WIDTH = 6;
   const RADIUS = DIAMETER / 2 - STROKE_WIDTH / 2;
   const circumference = Math.PI * RADIUS * 2;
-  const position = Math.max(1 - progress, 0);
+  const position = Math.max(1 - currentProgress, 0);
   // Progress bar info end
 
   useEffect(() => {
-    setProgress(64 / 100);
+    setCurrentProgress((progress || 0) / 100);
     return () => {
       clearTimeout(delay);
     };
@@ -81,7 +86,7 @@ const Book = ({ book }) => {
           </svg>
         </div>
         <div className="progress-value-container">
-          <p className="progress-value">{`${progress * 100}%`}</p>
+          <p className="progress-value">{`${currentProgress * 100}%`}</p>
           <p className="progress-completed">Completed</p>
         </div>
       </div>
@@ -100,6 +105,7 @@ Book.propTypes = {
     title: PropTypes.string,
     category: PropTypes.string,
     author: PropTypes.string,
+    progress: PropTypes.number,
   }).isRequired,
 };
 

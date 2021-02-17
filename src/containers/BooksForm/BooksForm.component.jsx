@@ -87,6 +87,7 @@ const BooksForm = () => {
       getDetails: false,
       category,
       author,
+      progress: 0,
     });
     setSuggestions([]);
   };
