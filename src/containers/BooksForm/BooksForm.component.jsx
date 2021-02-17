@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CREATE_BOOK } from '../../actions/index';
@@ -10,6 +11,8 @@ const BooksForm = () => {
   const initialInput = {
     text: '', category: '', valid: true, errorId: 0, errorMessage: '', getDetails: true,
   };
+  const [author, setAuthor] = useState('');
+  const [moreContent, setMoreContent] = useState(false);
   const [input, handleChange] = useState(initialInput);
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,7 +38,11 @@ const BooksForm = () => {
       }).then(response => response.json())
         .then(data => {
           if (data.books.totalItems > 0) {
+            setMoreContent(false);
             setSuggestions(data.books.items);
+          } else {
+            setMoreContent(true);
+            setSuggestions([]);
           }
           setLoading(false);
         });
@@ -61,20 +68,25 @@ const BooksForm = () => {
         id: Math.floor(Math.random() * 1000),
         title: input.text,
         category: input.category,
+        author,
       }));
       handleChange(initialInput);
+      setAuthor('');
+      setMoreContent(false);
       inputRef.current.value = '';
     }
   };
 
   const handleSuggestion = (e, book) => {
     inputRef.current.value = e.target.textContent;
-    const category = book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'Default';
+    const category = book.volumeInfo.categories ? book.volumeInfo.categories.join(', ') : 'Default';
+    const author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Anonymous';
     handleChange({
       ...input,
       text: e.target.textContent,
       getDetails: false,
       category,
+      author,
     });
     setSuggestions([]);
   };
@@ -99,7 +111,7 @@ const BooksForm = () => {
     <div className="max-width-limit">
       <h2 className="form-title">Add New Book</h2>
       <form id="book-form" className="max-width-limit" action="#">
-        <div className="form-content">
+        <div className={`form-content${moreContent ? ' more-details' : ''}`}>
           <input
             type="text"
             name="title"
@@ -117,7 +129,7 @@ const BooksForm = () => {
             type="text"
             name="category"
             id="category"
-            placeholder="Default"
+            placeholder="Default Category"
             list="categoryName"
             ref={categoryRef}
             className={input.errorId === 2 && !input.valid ? 'invalid' : ''}
@@ -136,6 +148,9 @@ const BooksForm = () => {
               ))
             }
           </datalist>
+          {moreContent
+            ? <input type="Text" id="author" onChange={e => setAuthor(e.target.value)} value={author} placeholder="Author" />
+            : ''}
           <input type="submit" onClick={handleSubmit} value="ADD BOOK" />
         </div>
         <div className="suggestion-box">
@@ -146,9 +161,11 @@ const BooksForm = () => {
                   <object type="image/svg+xml" data={loader}>loading</object>
                 </div>
               )
-              : suggestions.slice(0, 2).map((book, i) => (
-                <div role="menuitem" tabIndex={i} key={book.id} onKeyDown={e => handleSuggestion(e, book)} onClick={e => handleSuggestion(e, book)} className="book">{book.volumeInfo.title}</div>
-              ))}
+              : moreContent
+                ? <div>No content found. Please enter the details manually</div>
+                : suggestions.slice(0, 2).map((book, i) => (
+                  <div role="menuitem" tabIndex={i} key={book.id} onKeyDown={e => handleSuggestion(e, book)} onClick={e => handleSuggestion(e, book)} className="book">{book.volumeInfo.title}</div>
+                ))}
           </div>
         </div>
         {input.valid ? '' : (

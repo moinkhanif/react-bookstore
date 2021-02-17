@@ -7,7 +7,7 @@ import './Book.styles.css';
 const Book = ({ book }) => {
   const [progress, setProgress] = useState(0);
   const [deleteBook, setDeleteBook] = useState(false);
-  const { title, category } = book;
+  const { title, category, author } = book;
   const dispatch = useDispatch();
   let delay;
 
@@ -38,7 +38,7 @@ const Book = ({ book }) => {
       <div className="book-info">
         <p className="book-category">{category}</p>
         <h2 className="book-title">{title}</h2>
-        <p className="book-author">Author</p>
+        <p className="book-author">{author || 'Anonymous'}</p>
         <div className="book-actionable">
           <a href="./#">Comments</a>
           <a
@@ -99,6 +99,7 @@ Book.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     category: PropTypes.string,
+    author: PropTypes.string,
   }).isRequired,
 };
 
