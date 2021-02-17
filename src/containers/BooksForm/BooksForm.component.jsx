@@ -80,13 +80,12 @@ const BooksForm = () => {
   const handleSuggestion = (e, book) => {
     inputRef.current.value = e.target.textContent;
     const category = book.volumeInfo.categories ? book.volumeInfo.categories.join(', ') : 'Default';
-    const author = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Anonymous';
+    setAuthor(book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Anonymous');
     handleChange({
       ...input,
       text: e.target.textContent,
       getDetails: false,
       category,
-      author,
       progress: 0,
     });
     setSuggestions([]);

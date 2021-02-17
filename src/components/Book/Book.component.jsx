@@ -7,6 +7,7 @@ import './Book.styles.css';
 const Book = ({ book }) => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const [deleteBook, setDeleteBook] = useState(false);
+  const [iniUpdateProgress, setIniUpdateProgress] = useState(false);
   const {
     title,
     category,
@@ -93,7 +94,17 @@ const Book = ({ book }) => {
       <div className="progress-info">
         <div className="current-chapter-title">CURRENT CHAPTER</div>
         <div className="current-chapter">Chapter 17</div>
-        <button type="submit" className="update-progress-button">UPDATE PROGRESS</button>
+        <button type="submit" onClick={() => setIniUpdateProgress(!iniUpdateProgress)} className="update-progress-button">UPDATE PROGRESS</button>
+        {
+          iniUpdateProgress
+            ? (
+              <div className="progress-update-form">
+                <input type="number" value={currentProgress * 100} max="100" onChange={e => (e.target.checkValidity() ? setCurrentProgress(e.target.value / 100) : '')} />
+                <button type="submit" onClick={() => setIniUpdateProgress(false)}>Save</button>
+              </div>
+            )
+            : ''
+        }
       </div>
     </div>
   );

@@ -123,6 +123,18 @@
   margin-left: 60px;
 }
 
+.progress-update-form input,
+.progress-update-form button {
+  padding: 10px;
+}
+
+.progress-update-form input {
+  margin-top: 25px;
+  border-radius: 3px;
+  padding: 8px 22px;
+  border: 1px solid #4386bf;
+}
+
 .progress-info::before {
   content: '';
   height: 70%;
@@ -145,7 +157,8 @@
   margin-top: 7px;
 }
 
-.progress-info .update-progress-button {
+.progress-info .update-progress-button,
+.progress-update-form button {
   margin-top: 25px;
   border-radius: 3px;
   background-color: #0290ff;
